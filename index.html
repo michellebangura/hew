@@ -4,238 +4,226 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hew — Every moment counts.</title>
-  <meta name="description" content="See exactly where your child is, where they're heading, and what to do about it. Hew maps your child's development against real frameworks and brings every quality enrichment activity into one place.">
+  <meta name="description" content="See exactly where your child is, where they're heading, and what to do about it.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* LOCKED DESIGN TOKENS — kombra-operations/shared-infrastructure/DESIGN_SYSTEM_LOCKED.md */
     :root {
-      --kc-bg-primary:#FFF9F2; --kc-bg-secondary:#F3EBE1; --kc-bg-elevated:#FFFFFF; --kc-bg-inverse:#292524;
-      --kc-text-primary:#1C1917; --kc-text-secondary:#57534E; --kc-text-tertiary:#78716C; --kc-text-inverse:#FAFAF9;
-      --kc-brand-primary:#CA5C3B; --kc-brand-secondary:#E6A371; --kc-brand-accent:#4338CA;
-      --kc-success:#166534; --kc-warning:#9A3412; --kc-error:#9F1239; --kc-rule:#E7E5E4;
-      --kc-radius-sm:8px; --kc-radius-md:16px; --kc-radius-lg:24px; --kc-radius-pill:999px; --kc-border-width:2px;
-      --check-rigor:#0EA5E9; --check-inclusivity:#F59E0B; --check-perspective:#8B5CF6; --check-empathy:#F43F5E; --check-thinking:#10B981;
-      --ease-ui:cubic-bezier(0.4,0,0.2,1); --ease-enter:cubic-bezier(0.0,0,0.2,1); --ease-exit:cubic-bezier(0.4,0,1,1);
-      --dur-instant:100ms; --dur-fast:200ms; --dur-med:300ms; --dur-slow:500ms;
-      --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
-      --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-20:80px; --sp-24:96px;
+      --f0:#0D2018; --f1:#122A1C; --f2:#1A3828; --f3:#213F2F; --fb:rgba(42,80,64,0.5);
+      --t1:#F0EAE0; --t2:#8FAD9F; --t3:#4A6A5A;
+      --gold:#E8A94E; --goldh:#F5C47A; --goldd:rgba(232,169,78,0.12);
+      --terra:#CA5C3B; --datum:#4338CA;
+      --ck1:#0EA5E9; --ck2:#F59E0B; --ck3:#8B5CF6; --ck4:#F43F5E; --ck5:#10B981;
+      --eu:cubic-bezier(0.4,0,0.2,1); --ee:cubic-bezier(0.0,0,0.2,1);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    /* Fraunces optical sizing — required for distinctive rendering */
-    .nav-wordmark,.hero-headline,.section-headline,.step-num,.step-title,
-    .tlm-letter,.tlm-name,.feature-title,.footer-mark,.mock-greeting,.mock-child-name,.mock-lesson-title{font-optical-sizing:auto;}
-    body{background:var(--kc-bg-primary);color:var(--kc-text-primary);font-family:'Inter',sans-serif;font-size:18px;line-height:1.6;overflow-x:hidden;}
-    .datum-line{height:2px;background:var(--kc-brand-accent);width:100%;position:fixed;top:0;left:0;z-index:200;}
-    nav{position:fixed;top:2px;left:0;right:0;z-index:100;padding:var(--sp-4) var(--sp-12);display:flex;justify-content:space-between;align-items:center;background:rgba(255,249,242,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--kc-rule);}
-    .nav-wordmark{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 24,'wght' 700;font-size:24px;font-weight:700;letter-spacing:-0.03em;color:var(--kc-text-primary);}
-    .nav-wordmark span{color:var(--kc-brand-primary);}
-    .nav-cta{background:var(--kc-brand-primary);color:var(--kc-text-inverse);padding:var(--sp-3) var(--sp-6);border-radius:var(--kc-radius-sm);font-size:13px;font-weight:600;text-decoration:none;transition:background var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);}
-    .nav-cta:hover{background:var(--kc-brand-secondary);}
-    .nav-cta:active{transform:scale(0.97);}
-    .nav-cta:focus-visible{outline:2px solid var(--kc-brand-primary);outline-offset:2px;}
+    body{background:var(--f1);color:var(--t1);font-family:'Inter',sans-serif;font-size:18px;line-height:1.6;overflow-x:hidden;}
+    .dl{height:2px;background:var(--datum);width:100%;position:fixed;top:0;left:0;z-index:200;}
+    nav{position:fixed;top:2px;left:0;right:0;z-index:100;padding:16px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(13,32,24,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--fb);}
+    .wm{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 24,'wght' 700;font-size:26px;font-weight:700;letter-spacing:-0.04em;color:var(--t1);}
+    .wm span{color:var(--gold);}
+    .nc{background:var(--gold);color:var(--f1);padding:10px 22px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;transition:background 200ms var(--eu);}
+    .nc:hover{background:var(--goldh);}
+    .nc:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
     .hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;padding-top:66px;}
-    .hero-left{padding:var(--sp-24) var(--sp-12);display:flex;flex-direction:column;justify-content:center;}
-    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--kc-brand-primary);margin-bottom:var(--sp-6);opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.1s forwards;}
-    .hero-headline{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 72,'wght' 600;font-size:clamp(44px,5.5vw,72px);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:var(--kc-text-primary);margin-bottom:var(--sp-4);opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.2s forwards;}
-    .hero-headline em{font-weight:300;font-style:italic;color:var(--kc-text-tertiary);}
-    .hero-sub{font-size:18px;line-height:1.65;color:var(--kc-text-secondary);margin-bottom:var(--sp-10);max-width:480px;opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.35s forwards;}
-    .hero-sub strong{color:var(--kc-text-primary);font-weight:600;}
-    .waitlist-form{display:flex;flex-direction:column;gap:var(--sp-3);max-width:440px;opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.5s forwards;}
-    .form-row{display:flex;gap:var(--sp-2);}
-    .waitlist-form input[type="email"]{flex:1;padding:var(--sp-4) var(--sp-5);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-sm);font-size:15px;font-family:'Inter',sans-serif;background:var(--kc-bg-elevated);color:var(--kc-text-primary);outline:none;transition:border-color var(--dur-fast) var(--ease-ui);}
-    .waitlist-form input[type="email"]:focus{border-color:var(--kc-brand-primary);box-shadow:0 0 0 3px rgba(202,92,59,0.12);}
-    .waitlist-form input::placeholder{color:var(--kc-text-tertiary);}
-    .btn-primary{padding:var(--sp-4) var(--sp-8);background:var(--kc-text-primary);color:var(--kc-bg-primary);border:none;border-radius:var(--kc-radius-sm);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:background var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);white-space:nowrap;}
-    .btn-primary:hover{background:var(--kc-brand-primary);}
-    .btn-primary:active{transform:scale(0.97);}
-    .btn-primary:focus-visible{outline:2px solid var(--kc-brand-primary);outline-offset:2px;}
-    .form-note{font-size:13px;color:var(--kc-text-tertiary);}
-    .form-success{display:none;background:rgba(22,101,52,0.08);border:var(--kc-border-width) solid #166534;border-radius:var(--kc-radius-sm);padding:var(--sp-4) var(--sp-5);font-size:14px;font-weight:600;color:var(--kc-success);}
-    .hero-right{background:var(--kc-bg-secondary);display:flex;align-items:center;justify-content:center;padding:var(--sp-16) var(--sp-8);position:relative;overflow:hidden;}
-    .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,transparent 60%,rgba(202,92,59,0.06) 100%);pointer-events:none;}
-    .phone-wrap{display:flex;gap:var(--sp-5);align-items:flex-start;position:relative;z-index:1;}
-    .phone{width:210px;background:var(--kc-bg-elevated);border-radius:var(--kc-radius-lg);border:var(--kc-border-width) solid #D6D3D1;box-shadow:0 1px 2px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.06),0 20px 48px rgba(0,0,0,0.10);overflow:hidden;flex-shrink:0;}
-    .phone.offset{margin-top:var(--sp-12);}
-    .phone-notch{background:var(--kc-text-primary);height:24px;display:flex;align-items:center;justify-content:center;}
-    .notch-pill{width:60px;height:6px;border-radius:var(--kc-radius-pill);background:#3D3533;}
-    .phone-datum{height:2px;background:var(--kc-brand-accent);}
-    .phone-screen{background:var(--kc-bg-primary);padding:var(--sp-3);min-height:360px;}
-    .mock-greeting{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:17px;font-weight:600;color:var(--kc-text-primary);}
-    .mock-date{font-size:10px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-3);}
-    .mock-child-card{background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);padding:var(--sp-3);margin-bottom:var(--sp-3);}
-    .mock-child-name{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--kc-text-primary);line-height:1;}
-    .mock-child-age{font-size:9px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-2);margin-top:2px;}
-    .mock-interest{display:inline-flex;align-items:center;gap:var(--sp-1);background:var(--kc-bg-secondary);padding:2px var(--sp-2);border-radius:var(--kc-radius-pill);font-size:9px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-2);}
-    .mock-interest-dot{width:5px;height:5px;border-radius:50%;background:var(--kc-brand-primary);}
-    .mock-skill{font-size:10px;font-weight:500;color:var(--kc-text-primary);margin-bottom:var(--sp-2);}
-    .mock-btn{display:block;background:var(--kc-brand-primary);color:var(--kc-text-inverse);padding:var(--sp-2) var(--sp-3);border-radius:var(--kc-radius-sm);font-size:10px;font-weight:600;text-align:center;}
-    .mock-label{font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--kc-text-tertiary);margin-bottom:var(--sp-2);}
-    .mock-domain-row{display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-1);}
-    .mock-domain-name{font-size:9px;font-weight:500;color:var(--kc-text-secondary);width:40px;flex-shrink:0;}
-    .mock-bar-track{flex:1;height:4px;background:var(--kc-rule);border-radius:var(--kc-radius-pill);overflow:hidden;}
-    .mock-bar{height:100%;border-radius:var(--kc-radius-pill);}
-    .mock-bar.think{background:var(--check-rigor);}
-    .mock-bar.relate{background:var(--check-empathy);}
-    .mock-bar.move{background:var(--check-thinking);}
-    .mock-bar-val{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--kc-text-tertiary);width:18px;text-align:right;}
-    .mock-alert{margin-top:var(--sp-2);background:rgba(202,92,59,0.08);border:1px solid rgba(202,92,59,0.2);border-radius:var(--kc-radius-sm);padding:var(--sp-2);font-size:9px;color:var(--kc-warning);font-weight:500;line-height:1.4;}
-    .mock-search{background:var(--kc-bg-secondary);border-radius:var(--kc-radius-sm);padding:var(--sp-2);font-size:9px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-3);}
-    .mock-lesson-card{background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);padding:var(--sp-2) var(--sp-3);margin-bottom:var(--sp-2);}
-    .mock-lesson-meta{display:flex;justify-content:space-between;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--kc-text-tertiary);margin-bottom:var(--sp-1);}
-    .mock-lesson-title{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:11px;font-weight:600;color:var(--kc-text-primary);line-height:1.3;margin-bottom:3px;}
-    .mock-lesson-source{font-size:8px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-2);}
-    .mock-lesson-foot{display:flex;align-items:center;justify-content:space-between;padding-top:var(--sp-2);border-top:1px solid var(--kc-rule);}
-    .mock-lesson-checks{display:flex;align-items:center;gap:3px;font-size:8px;font-weight:700;color:var(--kc-text-primary);}
-    .mock-add{font-size:8px;font-weight:600;color:var(--kc-brand-primary);}
-    section{padding:var(--sp-24) var(--sp-12);}
-    .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--kc-brand-primary);margin-bottom:var(--sp-4);}
-    .section-headline{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 48,'wght' 600;font-size:clamp(32px,4vw,52px);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:var(--kc-text-primary);margin-bottom:var(--sp-5);}
-    .section-sub{font-size:18px;color:var(--kc-text-secondary);line-height:1.65;max-width:560px;margin-bottom:var(--sp-12);}
-    .how-section{background:var(--kc-bg-inverse);}
-    .how-section .section-eyebrow{color:var(--kc-brand-secondary);}
-    .how-section .section-headline{color:var(--kc-text-inverse);}
-    .how-section .section-sub{color:rgba(250,250,249,0.55);}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-6);}
-    .step{padding:var(--sp-8);background:rgba(250,250,249,0.05);border:1px solid rgba(250,250,249,0.08);border-radius:var(--kc-radius-md);}
-    .step-num{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:52px;font-weight:600;color:var(--kc-brand-primary);opacity:0.5;line-height:1;margin-bottom:var(--sp-5);}
-    .step-title{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:600;color:var(--kc-text-inverse);margin-bottom:var(--sp-3);}
-    .step-desc{font-size:15px;color:rgba(250,250,249,0.45);line-height:1.65;}
-    .frameworks{background:var(--kc-bg-primary);}
-    .framework-tags{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-12);}
-    .framework-tag{padding:var(--sp-2) var(--sp-4);background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-sm);font-size:13px;font-weight:600;color:var(--kc-text-secondary);}
-    .framework-tag.active{background:var(--kc-brand-primary);color:var(--kc-text-inverse);border-color:var(--kc-brand-primary);}
-    .tlm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5);}
-    .tlm-card{padding:var(--sp-8);border-radius:var(--kc-radius-lg);border:var(--kc-border-width) solid var(--kc-rule);background:var(--kc-bg-elevated);}
-    .tlm-letter{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:40px;font-weight:700;line-height:1;margin-bottom:var(--sp-4);}
-    .tlm-card.think .tlm-letter{color:var(--check-rigor);}
-    .tlm-card.relate .tlm-letter{color:var(--check-empathy);}
-    .tlm-card.move .tlm-letter{color:var(--check-thinking);}
-    .tlm-name{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:22px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-3);}
-    .tlm-desc{font-size:14px;color:var(--kc-text-secondary);line-height:1.65;margin-bottom:var(--sp-4);}
-    .tlm-domains{display:flex;flex-wrap:wrap;gap:var(--sp-1);}
-    .tlm-domain{padding:2px var(--sp-2);background:var(--kc-bg-secondary);border-radius:var(--kc-radius-sm);font-size:11px;font-weight:600;color:var(--kc-text-tertiary);}
-    .features-section{background:var(--kc-bg-secondary);}
-    .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);}
-    .feature-card{padding:var(--sp-8);background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);}
-    .feature-card.warm{background:var(--kc-bg-primary);border-color:transparent;}
-    .feature-icon{width:40px;height:40px;border-radius:var(--kc-radius-sm);background:var(--kc-brand-primary);margin-bottom:var(--sp-5);display:flex;align-items:center;justify-content:center;}
-    .feature-icon.dark{background:var(--kc-bg-inverse);}
-    .feature-icon.accent{background:var(--kc-brand-accent);}
-    .feature-title{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-3);line-height:1.2;}
-    .feature-desc{font-size:15px;color:var(--kc-text-secondary);line-height:1.65;}
-    .survey-section{background:var(--kc-bg-primary);}
-    .survey-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);}
-    .survey-q{padding:var(--sp-6);background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);}
-    .survey-q.wide{grid-column:span 2;}
-    .survey-q label{display:block;font-size:14px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-3);}
-    .survey-q select,.survey-q textarea,.survey-q input[type="text"]{width:100%;padding:var(--sp-3) var(--sp-4);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-sm);font-size:14px;font-family:'Inter',sans-serif;color:var(--kc-text-primary);background:var(--kc-bg-primary);outline:none;transition:border-color var(--dur-fast) var(--ease-ui);}
-    .survey-q select:focus,.survey-q textarea:focus,.survey-q input[type="text"]:focus{border-color:var(--kc-brand-primary);box-shadow:0 0 0 3px rgba(202,92,59,0.1);}
-    .survey-q textarea{resize:vertical;min-height:80px;}
-    .survey-checks{display:flex;flex-direction:column;gap:var(--sp-2);}
-    .check-opt{display:flex;align-items:flex-start;gap:var(--sp-3);cursor:pointer;font-size:14px;color:var(--kc-text-primary);line-height:1.5;}
-    .check-opt input{accent-color:var(--kc-brand-primary);width:16px;height:16px;margin-top:2px;flex-shrink:0;}
-    .check-opt:focus-within{outline:2px solid var(--kc-brand-primary);border-radius:2px;}
-    .survey-submit{grid-column:span 2;}
-    .survey-submit button{padding:var(--sp-4) var(--sp-8);background:var(--kc-brand-primary);color:var(--kc-text-inverse);border:none;border-radius:var(--kc-radius-sm);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:background var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);}
-    .survey-submit button:hover{background:var(--kc-text-primary);}
-    .survey-submit button:active{transform:scale(0.97);}
-    .survey-submit button:focus-visible{outline:2px solid var(--kc-brand-primary);outline-offset:2px;}
-    .final-cta{background:var(--kc-bg-inverse);text-align:center;padding:var(--sp-24) var(--sp-12);}
-    .final-cta .section-eyebrow{color:var(--kc-brand-secondary);}
-    .final-cta .section-headline{color:var(--kc-text-inverse);max-width:560px;margin:0 auto var(--sp-4);}
-    .final-cta .section-sub{color:rgba(250,250,249,0.5);margin:0 auto var(--sp-12);text-align:center;}
-    .final-form{display:flex;gap:var(--sp-2);max-width:420px;margin:0 auto;justify-content:center;}
-    .final-form input[type="email"]{flex:1;padding:var(--sp-4) var(--sp-5);border:var(--kc-border-width) solid rgba(250,250,249,0.15);border-radius:var(--kc-radius-sm);font-size:15px;font-family:'Inter',sans-serif;background:rgba(250,250,249,0.08);color:var(--kc-text-inverse);outline:none;}
-    .final-form input::placeholder{color:rgba(250,250,249,0.35);}
-    .final-form button{padding:var(--sp-4) var(--sp-6);background:var(--kc-brand-primary);color:var(--kc-text-inverse);border:none;border-radius:var(--kc-radius-sm);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;}
-    .final-form button:hover{background:var(--kc-brand-secondary);color:var(--kc-text-primary);}
-    footer{background:var(--kc-bg-inverse);padding:var(--sp-8) var(--sp-12);display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(250,250,249,0.08);}
-    .footer-mark{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:700;color:var(--kc-text-inverse);letter-spacing:-0.02em;}
-    .footer-mark span{color:var(--kc-brand-secondary);}
-    .footer-note{font-size:12px;color:rgba(250,250,249,0.3);}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .hl{padding:96px 48px;display:flex;flex-direction:column;justify-content:center;}
+    .ey{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--terra);margin-bottom:24px;opacity:0;animation:up 500ms var(--ee) 0.1s forwards;}
+    .hh{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 72,'wght' 600;font-size:clamp(48px,6vw,80px);font-weight:600;line-height:0.95;letter-spacing:-0.03em;color:var(--t1);margin-bottom:24px;opacity:0;animation:up 500ms var(--ee) 0.2s forwards;}
+    .hh em{font-weight:300;font-style:italic;color:var(--gold);}
+    .hs{font-size:18px;line-height:1.65;color:var(--t2);margin-bottom:40px;max-width:460px;opacity:0;animation:up 500ms var(--ee) 0.35s forwards;}
+    .hs strong{color:var(--t1);font-weight:600;}
+    .wf{display:flex;flex-direction:column;gap:12px;max-width:440px;opacity:0;animation:up 500ms var(--ee) 0.5s forwards;}
+    .fr{display:flex;gap:8px;}
+    .wf input[type=email]{flex:1;padding:16px 20px;border:1px solid var(--fb);border-radius:8px;font-size:15px;font-family:'Inter',sans-serif;background:var(--f3);color:var(--t1);outline:none;transition:border-color 200ms var(--eu);}
+    .wf input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--goldd);}
+    .wf input::placeholder{color:var(--t3);}
+    .bg{padding:16px 32px;background:var(--gold);color:var(--f1);border:none;border-radius:8px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;white-space:nowrap;transition:background 200ms var(--eu);}
+    .bg:hover{background:var(--goldh);}
+    .bg:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+    .fn{font-size:13px;color:var(--t3);}
+    .fs{display:none;background:rgba(16,185,129,0.1);border:1px solid #10B981;border-radius:8px;padding:16px 20px;font-size:14px;font-weight:600;color:#6EE7B7;}
+    .hr{background:var(--f2);display:flex;align-items:center;justify-content:center;padding:64px 32px;position:relative;overflow:hidden;}
+    .hr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 35%,rgba(232,169,78,0.07),transparent 70%);pointer-events:none;}
+    .pw{display:flex;gap:20px;align-items:flex-start;position:relative;z-index:1;}
+    .ph{width:210px;background:#FFF9F2;border-radius:24px;border:2px solid var(--fb);box-shadow:0 4px 24px rgba(0,0,0,0.5),0 24px 64px rgba(0,0,0,0.35);overflow:hidden;flex-shrink:0;}
+    .ph.off{margin-top:48px;}
+    .pn{background:#0A1A10;height:24px;display:flex;align-items:center;justify-content:center;}
+    .np{width:60px;height:6px;border-radius:999px;background:#1A3828;}
+    .pd{height:2px;background:var(--datum);}
+    .ps{background:#FFF9F2;padding:12px;min-height:360px;}
+    .mg{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:17px;font-weight:600;color:#1C1917;}
+    .md{font-size:10px;color:#78716C;margin-bottom:12px;}
+    .mc{background:white;border:2px solid #E7E5E4;border-radius:16px;padding:12px;margin-bottom:12px;}
+    .mn{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#1C1917;line-height:1;}
+    .ma{font-size:9px;color:#78716C;margin-bottom:8px;margin-top:2px;}
+    .mi{display:inline-flex;align-items:center;gap:4px;background:#F3EBE1;padding:2px 8px;border-radius:999px;font-size:9px;font-weight:600;color:#1C1917;margin-bottom:8px;}
+    .mdo{width:5px;height:5px;border-radius:50%;background:#CA5C3B;}
+    .msk{font-size:10px;font-weight:500;color:#1C1917;margin-bottom:8px;}
+    .mb{display:block;background:#CA5C3B;color:white;padding:8px 12px;border-radius:8px;font-size:10px;font-weight:600;text-align:center;}
+    .ml{font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#78716C;margin-bottom:8px;}
+    .dr{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+    .dn{font-size:9px;font-weight:500;color:#57534E;width:40px;flex-shrink:0;}
+    .bt{flex:1;height:4px;background:#E7E5E4;border-radius:999px;overflow:hidden;}
+    .bi{height:100%;border-radius:999px;}
+    .bi.tk{background:var(--ck1);}
+    .bi.rl{background:var(--ck4);}
+    .bi.mv{background:var(--ck5);}
+    .bv{font-family:'JetBrains Mono',monospace;font-size:8px;color:#78716C;width:18px;text-align:right;}
+    .al{margin-top:8px;background:rgba(202,92,59,0.1);border:1px solid rgba(202,92,59,0.25);border-radius:8px;padding:8px;font-size:9px;color:#7C2D12;font-weight:500;line-height:1.4;}
+    .msr{background:#F3EBE1;border-radius:8px;padding:7px 9px;font-size:9px;color:#78716C;margin-bottom:12px;}
+    .lc{background:white;border:2px solid #E7E5E4;border-radius:16px;padding:8px 12px;margin-bottom:8px;}
+    .lm{display:flex;justify-content:space-between;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#78716C;margin-bottom:4px;}
+    .lt{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:11px;font-weight:600;color:#1C1917;line-height:1.3;margin-bottom:3px;}
+    .ls{font-size:8px;color:#78716C;margin-bottom:8px;}
+    .lf{display:flex;align-items:center;justify-content:space-between;padding-top:7px;border-top:1px solid #E7E5E4;}
+    .lk{display:flex;align-items:center;gap:3px;font-size:8px;font-weight:700;color:#1C1917;}
+    .la{font-size:8px;font-weight:600;color:#CA5C3B;}
+    section{padding:96px 48px;}
+    .sey{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+    .sh{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 48,'wght' 600;font-size:clamp(32px,4vw,52px);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:var(--t1);margin-bottom:20px;}
+    .ss{font-size:18px;color:var(--t2);line-height:1.65;max-width:560px;margin-bottom:48px;}
+    .how{background:var(--f0);}
+    .how .sey{color:var(--terra);}
+    .stg{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .st{padding:32px;background:var(--f1);border:1px solid var(--fb);border-radius:16px;}
+    .sn{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:52px;font-weight:600;color:var(--gold);opacity:0.35;line-height:1;margin-bottom:20px;}
+    .stl{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:600;color:var(--t1);margin-bottom:12px;}
+    .std{font-size:15px;color:var(--t2);line-height:1.65;}
+    .frm{background:var(--f2);}
+    .ftg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:48px;}
+    .ft{padding:8px 16px;background:transparent;border:1px solid var(--fb);border-radius:8px;font-size:13px;font-weight:600;color:var(--t2);}
+    .ft.on{background:var(--goldd);color:var(--gold);border-color:rgba(232,169,78,0.4);}
+    .tlm{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .tc{padding:32px;border-radius:24px;border:1px solid var(--fb);background:var(--f3);}
+    .tl{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:44px;font-weight:700;line-height:1;margin-bottom:16px;}
+    .tc.tk .tl{color:var(--ck1);}
+    .tc.rl .tl{color:var(--ck4);}
+    .tc.mv .tl{color:var(--ck5);}
+    .tn{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:22px;font-weight:600;color:var(--t1);margin-bottom:12px;}
+    .td{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:16px;}
+    .tdm{display:flex;flex-wrap:wrap;gap:4px;}
+    .tdt{padding:2px 8px;background:var(--f2);border-radius:8px;font-size:11px;font-weight:600;color:var(--t3);}
+    .feat{background:var(--f1);}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    .fc{padding:32px;background:var(--f3);border:1px solid var(--fb);border-radius:16px;}
+    .fc.gl{background:var(--goldd);border-color:rgba(232,169,78,0.2);}
+    .fi{width:40px;height:40px;border-radius:8px;background:var(--terra);margin-bottom:20px;display:flex;align-items:center;justify-content:center;}
+    .fi.gd{background:var(--gold);}
+    .fi.dt{background:var(--datum);}
+    .ftl{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:600;color:var(--t1);margin-bottom:12px;line-height:1.2;}
+    .fdesc{font-size:15px;color:var(--t2);line-height:1.65;}
+    .surv{background:var(--f2);}
+    .sg{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .sq{padding:24px;background:var(--f3);border:1px solid var(--fb);border-radius:16px;}
+    .sq.w{grid-column:span 2;}
+    .sq label{display:block;font-size:14px;font-weight:600;color:var(--t1);margin-bottom:12px;}
+    .sq select,.sq textarea,.sq input[type=text]{width:100%;padding:12px 16px;border:1px solid var(--fb);border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:var(--t1);background:var(--f2);outline:none;transition:border-color 200ms var(--eu);}
+    .sq select:focus,.sq textarea:focus,.sq input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--goldd);}
+    .sq select option{background:var(--f0);}
+    .sq textarea{resize:vertical;min-height:80px;}
+    .cks{display:flex;flex-direction:column;gap:8px;}
+    .co{display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:14px;color:var(--t2);line-height:1.5;}
+    .co input{accent-color:var(--gold);width:16px;height:16px;margin-top:2px;flex-shrink:0;}
+    .sub{grid-column:span 2;}
+    .sub button{padding:16px 32px;background:var(--gold);color:var(--f1);border:none;border-radius:8px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:background 200ms var(--eu);}
+    .sub button:hover{background:var(--goldh);}
+    .sub button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+    .cta{background:var(--f0);text-align:center;padding:96px 48px;}
+    .cta .sey{color:var(--terra);}
+    .cta .sh{max-width:560px;margin:0 auto 16px;}
+    .cta .ss{margin:0 auto 48px;text-align:center;}
+    .ff{display:flex;gap:8px;max-width:420px;margin:0 auto;}
+    .ff input[type=email]{flex:1;padding:16px 20px;border:1px solid var(--fb);border-radius:8px;font-size:15px;font-family:'Inter',sans-serif;background:var(--f3);color:var(--t1);outline:none;}
+    .ff input::placeholder{color:var(--t3);}
+    .ff input:focus{border-color:var(--gold);}
+    .ff button{padding:16px 24px;background:var(--gold);color:var(--f1);border:none;border-radius:8px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:background 200ms var(--eu);}
+    .ff button:hover{background:var(--goldh);}
+    footer{background:var(--f0);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--fb);}
+    .fm{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:700;color:var(--t1);letter-spacing:-0.02em;}
+    .fm span{color:var(--gold);}
+    .fnote{font-size:12px;color:var(--t3);}
+    @keyframes up{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
     @media(max-width:1024px){
-      .hero{grid-template-columns:1fr;} .hero-right{min-height:420px;}
-      .steps,.tlm-cards,.features-grid,.survey-grid{grid-template-columns:1fr;}
-      .survey-q.wide,.survey-submit{grid-column:span 1;}
-      nav{padding:var(--sp-4) var(--sp-5);} section{padding:var(--sp-16) var(--sp-5);}
-      .hero-left{padding:var(--sp-16) var(--sp-5);} .form-row,.final-form{flex-direction:column;}
-      footer{flex-direction:column;gap:var(--sp-3);text-align:center;}
+      .hero{grid-template-columns:1fr;} .hr{min-height:400px;}
+      .stg,.tlm,.fg,.sg{grid-template-columns:1fr;}
+      .sq.w,.sub{grid-column:span 1;}
+      nav,.hl{padding-left:20px;padding-right:20px;}
+      section{padding:64px 20px;} .fr,.ff{flex-direction:column;}
+      footer{flex-direction:column;gap:12px;text-align:center;}
     }
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
   </style>
 </head>
 <body>
-<div class="datum-line" role="presentation"></div>
-<nav aria-label="Main navigation">
-  <div class="nav-wordmark" aria-label="Hew">Hew<span>.</span></div>
-  <a class="nav-cta" href="#waitlist">Join the beta</a>
+<div class="dl"></div>
+<nav>
+  <div class="wm">Hew<span>.</span></div>
+  <a class="nc" href="#join">Join the beta</a>
 </nav>
 
-<section class="hero" id="waitlist" aria-label="Hero and waitlist signup">
-  <div class="hero-left">
-    <p class="hero-eyebrow" aria-hidden="true">Summer 2026 Beta — Opens in 2 weeks</p>
-    <h1 class="hero-headline">Every moment<br><em>counts.</em></h1>
-    <p class="hero-sub">See exactly where your child is, where they're heading, and what to do about it — with activities from everywhere quality enrichment lives, mapped to their development, scheduled in the time you have.<br><br><strong>Free beta. Limited spots. Summer starts now.</strong></p>
-    <form class="waitlist-form" name="waitlist" netlify netlify-honeypot="bot-field" onsubmit="handleWaitlist(event)" aria-label="Waitlist signup form">
+<section class="hero" id="join">
+  <div class="hl">
+    <p class="ey">Summer 2026 Beta — Opens in 2 weeks</p>
+    <h1 class="hh">Every moment<br><em>counts.</em></h1>
+    <p class="hs">See exactly where your child is, where they're heading, and what to do about it — with activities from everywhere quality enrichment lives, mapped to their development, scheduled in the time you have.<br><br><strong>Free beta. Limited spots. Summer starts now.</strong></p>
+    <form class="wf" name="waitlist" netlify netlify-honeypot="bot-field" onsubmit="hw(event)">
       <input type="hidden" name="form-name" value="waitlist">
       <p style="display:none"><input name="bot-field"></p>
-      <div class="form-row">
-        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
-        <button type="submit" class="btn-primary">Join waitlist</button>
+      <div class="fr">
+        <input type="email" name="email" placeholder="Your email address" required autocomplete="email">
+        <button type="submit" class="bg">Join waitlist</button>
       </div>
-      <p class="form-note">No spam. Beta invite in 2 weeks. Unsubscribe anytime.</p>
-      <div class="form-success" id="waitlist-success" role="status" aria-live="polite">✓ You're on the list. Beta invite coming soon.</div>
+      <p class="fn">No spam. Beta invite in 2 weeks. Unsubscribe anytime.</p>
+      <div class="fs" id="ws" role="status">✓ You're on the list. Beta invite coming soon.</div>
     </form>
   </div>
-  <div class="hero-right" aria-hidden="true">
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="phone-notch"><div class="notch-pill"></div></div>
-        <div class="phone-datum"></div>
-        <div class="phone-screen">
-          <div class="mock-greeting">Good morning</div>
-          <div class="mock-date">Saturday · June 28</div>
-          <div class="mock-child-card">
-            <div class="mock-child-name">Zain</div>
-            <div class="mock-child-age">4 years 6 months</div>
-            <div class="mock-interest"><div class="mock-interest-dot"></div>Dinosaurs</div>
-            <div class="mock-skill">Working on: Phoneme blending</div>
-            <div class="mock-btn">Start a session →</div>
+  <div class="hr" aria-hidden="true">
+    <div class="pw">
+      <div class="ph">
+        <div class="pn"><div class="np"></div></div>
+        <div class="pd"></div>
+        <div class="ps">
+          <div class="mg">Good morning</div>
+          <div class="md">Saturday · June 28</div>
+          <div class="mc">
+            <div class="mn">Zain</div>
+            <div class="ma">4 years 6 months</div>
+            <div class="mi"><div class="mdo"></div>Dinosaurs</div>
+            <div class="msk">Working on: Phoneme blending</div>
+            <div class="mb">Start a session →</div>
           </div>
-          <div class="mock-label">Development snapshot</div>
-          <div class="mock-domain-row"><div class="mock-domain-name">Think</div><div class="mock-bar-track"><div class="mock-bar think" style="width:62%"></div></div><div class="mock-bar-val">3.1</div></div>
-          <div class="mock-domain-row"><div class="mock-domain-name">Relate</div><div class="mock-bar-track"><div class="mock-bar relate" style="width:78%"></div></div><div class="mock-bar-val">3.9</div></div>
-          <div class="mock-domain-row"><div class="mock-domain-name">Move</div><div class="mock-bar-track"><div class="mock-bar move" style="width:85%"></div></div><div class="mock-bar-val">4.2</div></div>
-          <div class="mock-alert">⚠ Literacy — Phoneme awareness below expected range for 54 months</div>
+          <div class="ml">Development snapshot</div>
+          <div class="dr"><div class="dn">Think</div><div class="bt"><div class="bi tk" style="width:62%"></div></div><div class="bv">3.1</div></div>
+          <div class="dr"><div class="dn">Relate</div><div class="bt"><div class="bi rl" style="width:78%"></div></div><div class="bv">3.9</div></div>
+          <div class="dr"><div class="dn">Move</div><div class="bt"><div class="bi mv" style="width:85%"></div></div><div class="bv">4.2</div></div>
+          <div class="al">⚠ Literacy — Phoneme awareness below expected range for 54 months</div>
         </div>
       </div>
-      <div class="phone offset">
-        <div class="phone-notch"><div class="notch-pill"></div></div>
-        <div class="phone-datum"></div>
-        <div class="phone-screen">
-          <div class="mock-label">Lesson library</div>
-          <div class="mock-search">🔍 Search for Zain...</div>
-          <div class="mock-lesson-card">
-            <div class="mock-lesson-meta"><span>Literacy · 3–5</span><span>Khan Kids</span></div>
-            <div class="mock-lesson-title">Letter sounds: Beginning phonemes</div>
-            <div class="mock-lesson-source">free</div>
-            <div class="mock-lesson-foot"><div class="mock-lesson-checks"><svg width="12" height="12" viewBox="0 0 40 40" id="b1"></svg> 4.2</div><div class="mock-add">+ Calendar</div></div>
+      <div class="ph off">
+        <div class="pn"><div class="np"></div></div>
+        <div class="pd"></div>
+        <div class="ps">
+          <div class="ml">Lesson library</div>
+          <div class="msr">🔍 Search for Zain...</div>
+          <div class="lc">
+            <div class="lm"><span>Literacy · 3–5</span><span>Khan Kids</span></div>
+            <div class="lt">Letter sounds: Beginning phonemes</div>
+            <div class="ls">free</div>
+            <div class="lf"><div class="lk"><svg width="12" height="12" id="b1"></svg> 4.2</div><div class="la">+ Calendar</div></div>
           </div>
-          <div class="mock-lesson-card">
-            <div class="mock-lesson-meta"><span>Literacy · 4–6</span><span>TPT</span></div>
-            <div class="mock-lesson-title">Rhyming rockets: Phonemic awareness games</div>
-            <div class="mock-lesson-source">$3.50</div>
-            <div class="mock-lesson-foot"><div class="mock-lesson-checks"><svg width="12" height="12" viewBox="0 0 40 40" id="b2"></svg> Not scored</div><div class="mock-add">Score it →</div></div>
+          <div class="lc">
+            <div class="lm"><span>Literacy · 4–6</span><span>TPT</span></div>
+            <div class="lt">Rhyming rockets: Phonemic awareness</div>
+            <div class="ls">$3.50</div>
+            <div class="lf"><div class="lk"><svg width="12" height="12" id="b2"></svg> Not scored</div><div class="la">Score it →</div></div>
           </div>
-          <div class="mock-lesson-card">
-            <div class="mock-lesson-meta"><span>Literacy · 3–5</span><span>PBS Kids</span></div>
-            <div class="mock-lesson-title">Word families with Elmo</div>
-            <div class="mock-lesson-source">free</div>
-            <div class="mock-lesson-foot"><div class="mock-lesson-checks"><svg width="12" height="12" viewBox="0 0 40 40" id="b3"></svg> 5.0</div><div class="mock-add">+ Calendar</div></div>
+          <div class="lc">
+            <div class="lm"><span>Literacy · 3–5</span><span>PBS Kids</span></div>
+            <div class="lt">Word families with Elmo</div>
+            <div class="ls">free</div>
+            <div class="lf"><div class="lk"><svg width="12" height="12" id="b3"></svg> 5.0</div><div class="la">+ Calendar</div></div>
           </div>
         </div>
       </div>
@@ -243,72 +231,81 @@
   </div>
 </section>
 
-<section class="how-section" aria-label="How Hew works">
-  <div class="section-eyebrow">How it works</div>
-  <h2 class="section-headline">Built around your child.<br>Ready for your Saturday.</h2>
-  <p class="section-sub">Tell us who your child is. We show you where they are, where to go next, and what to do about it.</p>
-  <div class="steps">
-    <div class="step"><div class="step-num">01</div><h3 class="step-title">Build your child's profile</h3><p class="step-desc">Age, interests, any developmental notes. Four minutes. Hew maps their development against CDC milestones, CASEL standards, and grade-level academic frameworks immediately.</p></div>
-    <div class="step"><div class="step-num">02</div><h3 class="step-title">See where they are and what's next</h3><p class="step-desc">A clear view of where your child is strong, where they need more work, and their rate of progress. Not a score — a trajectory. Updated every time you log an activity.</p></div>
-    <div class="step"><div class="step-num">03</div><h3 class="step-title">Find it. Score it. Plan the year.</h3><p class="step-desc">Every quality enrichment activity from Khan Academy, TPT, PBS, museums, and libraries — in one place. Scheduled by the day, month, or quarter against your child's developmental goals.</p></div>
+<section class="how">
+  <div class="sey">How it works</div>
+  <h2 class="sh">Built around your child.<br>Ready for your Saturday.</h2>
+  <p class="ss">Tell us who your child is. We show you where they are, where to go next, and what to do about it.</p>
+  <div class="stg">
+    <div class="st"><div class="sn">01</div><h3 class="stl">Build your child's profile</h3><p class="std">Age, interests, any developmental notes. Four minutes. Hew maps their development against CDC milestones, CASEL standards, and grade-level academic frameworks immediately.</p></div>
+    <div class="st"><div class="sn">02</div><h3 class="stl">See where they are and what's next</h3><p class="std">A clear view of where your child is strong, where they need more work, and their rate of progress. Not a score — a trajectory. Updated every time you log an activity.</p></div>
+    <div class="st"><div class="sn">03</div><h3 class="stl">Find it. Score it. Plan the year.</h3><p class="std">Every quality enrichment activity from Khan Academy, TPT, PBS, museums, and libraries — in one place. Scheduled against your child's developmental goals.</p></div>
   </div>
 </section>
 
-<section class="frameworks" aria-label="Developmental frameworks">
-  <div class="section-eyebrow">Built on validated science</div>
-  <h2 class="section-headline">Real frameworks.<br>Not invented categories.</h2>
-  <p class="section-sub">Your child's development mapped against the standards pediatricians, schools, and researchers actually use — at every stage from birth through high school.</p>
-  <div class="framework-tags">
-    <div class="framework-tag active">CDC Developmental Milestones</div>
-    <div class="framework-tag">CASEL Social-Emotional Learning</div>
-    <div class="framework-tag">Common Core ELA & Math</div>
-    <div class="framework-tag">Next Generation Science Standards</div>
-    <div class="framework-tag">Head Start ELOF</div>
-    <div class="framework-tag">National PE Standards</div>
+<section class="frm">
+  <div class="sey">Built on validated science</div>
+  <h2 class="sh">Real frameworks.<br>Not invented categories.</h2>
+  <p class="ss">Your child's development mapped against the standards pediatricians, schools, and researchers actually use — from birth through high school.</p>
+  <div class="ftg">
+    <div class="ft on">CDC Developmental Milestones</div>
+    <div class="ft">CASEL Social-Emotional Learning</div>
+    <div class="ft">Common Core ELA & Math</div>
+    <div class="ft">Next Generation Science Standards</div>
+    <div class="ft">Head Start ELOF</div>
+    <div class="ft">National PE Standards</div>
   </div>
-  <div class="tlm-cards">
-    <div class="tlm-card think"><div class="tlm-letter">T</div><h3 class="tlm-name">Think</h3><p class="tlm-desc">How your child reasons, reads, counts, and makes sense of the world.</p><div class="tlm-domains"><span class="tlm-domain">Literacy</span><span class="tlm-domain">Numeracy</span><span class="tlm-domain">Science</span><span class="tlm-domain">Executive Function</span><span class="tlm-domain">Reasoning</span></div></div>
-    <div class="tlm-card relate"><div class="tlm-letter">R</div><h3 class="tlm-name">Relate</h3><p class="tlm-desc">How your child connects with others, manages emotions, and communicates.</p><div class="tlm-domains"><span class="tlm-domain">Social-Emotional</span><span class="tlm-domain">Communication</span><span class="tlm-domain">Empathy</span><span class="tlm-domain">Self-Regulation</span></div></div>
-    <div class="tlm-card move"><div class="tlm-letter">M</div><h3 class="tlm-name">Move</h3><p class="tlm-desc">How your child develops physically — from big movements to fine motor control.</p><div class="tlm-domains"><span class="tlm-domain">Gross Motor</span><span class="tlm-domain">Fine Motor</span><span class="tlm-domain">Sensory</span><span class="tlm-domain">Physical Health</span></div></div>
-  </div>
-</section>
-
-<section class="features-section" aria-label="Hew features">
-  <div class="section-eyebrow">Features</div>
-  <h2 class="section-headline">Everything in one place.</h2>
-  <p class="section-sub">The development map. The library. The calendar. The caregiver plan. All connected.</p>
-  <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/></svg></div><h3 class="feature-title">Development dashboard</h3><p class="feature-desc">Your child's progress across every domain, mapped to validated frameworks. Full view or Think / Relate / Move. See where they're strong. See where they need work. See the rate of movement over time.</p></div>
-    <div class="feature-card warm"><div class="feature-icon dark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><h3 class="feature-title">Lesson library</h3><p class="feature-desc">Every quality enrichment activity from Khan Academy, Teachers Pay Teachers, PBS Kids, museum curricula, and library programs — in one place. Tagged by age and domain. Direct link to the provider. No content hosted. Always up to date.</p></div>
-    <div class="feature-card warm"><div class="feature-icon accent"><svg width="20" height="20" viewBox="0 0 40 40" id="feat-badge"></svg></div><h3 class="feature-title">Five Checks quality scoring</h3><p class="feature-desc">Every lesson is scored across five dimensions: Rigor, Inclusivity, Perspective, Empathy, Critical Thinking. The AI scores lessons automatically. Parents refine scores and add context — turning a 2.5 into a 5.</p></div>
-    <div class="feature-card"><div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3 class="feature-title">Developmental calendar</h3><p class="feature-desc">Plan by the day, month, quarter, or year. Recurring classes — swim lessons, gymnastics — sit alongside one-time events and open activity slots. The calendar becomes your child's developmental record as you log outcomes.</p></div>
-    <div class="feature-card" style="grid-column:span 2"><div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="feature-title">Caregiver mode — no login, no decisions</h3><p class="feature-desc">Share a 6-character code. Grandma opens the link. She sees today's plan — already made for her, based on your child's profile and regulation windows. What to do. What to say to start. What success looks like. What to do if it goes sideways. She executes. She doesn't decide. She feels capable. You see what happened.</p></div>
+  <div class="tlm">
+    <div class="tc tk"><div class="tl">T</div><h3 class="tn">Think</h3><p class="td">How your child reasons, reads, counts, and makes sense of the world.</p><div class="tdm"><span class="tdt">Literacy</span><span class="tdt">Numeracy</span><span class="tdt">Science</span><span class="tdt">Executive Function</span></div></div>
+    <div class="tc rl"><div class="tl">R</div><h3 class="tn">Relate</h3><p class="td">How your child connects with others, manages emotions, and communicates.</p><div class="tdm"><span class="tdt">Social-Emotional</span><span class="tdt">Communication</span><span class="tdt">Self-Regulation</span></div></div>
+    <div class="tc mv"><div class="tl">M</div><h3 class="tn">Move</h3><p class="td">How your child develops physically — from big movements to fine motor control.</p><div class="tdm"><span class="tdt">Gross Motor</span><span class="tdt">Fine Motor</span><span class="tdt">Sensory</span></div></div>
   </div>
 </section>
 
-<section class="survey-section" aria-label="Feedback survey">
-  <div class="section-eyebrow">Help us build this for you</div>
-  <h2 class="section-headline">Tell us what you need.</h2>
-  <p class="section-sub">Real parent feedback goes directly into what we ship first.</p>
-  <form class="survey-grid" name="survey" netlify netlify-honeypot="bot-field-survey" onsubmit="handleSurvey(event)">
+<section class="feat">
+  <div class="sey">Features</div>
+  <h2 class="sh">Everything in one place.</h2>
+  <p class="ss">The development map. The library. The calendar. The caregiver plan. All connected.</p>
+  <div class="fg">
+    <div class="fc"><div class="fi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/></svg></div><h3 class="ftl">Development dashboard</h3><p class="fdesc">Your child's progress across every domain, mapped to validated frameworks. Full view or Think / Relate / Move. See where they're strong, where they need work, and the rate of movement over time.</p></div>
+    <div class="fc gl"><div class="fi gd"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#122A1C" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><h3 class="ftl">Lesson library</h3><p class="fdesc">Every quality enrichment activity from Khan Academy, TPT, PBS Kids, museum curricula, and library programs — in one place. Tagged by age and domain. Direct link to the provider. No content hosted.</p></div>
+    <div class="fc gl"><div class="fi dt"><svg width="20" height="20" viewBox="0 0 40 40" id="fb"></svg></div><h3 class="ftl">Five Checks quality scoring</h3><p class="fdesc">Every lesson scored across five dimensions: Rigor, Inclusivity, Perspective, Empathy, Critical Thinking. AI scores on ingest. Parents add context to turn a 2.5 into a 5.</p></div>
+    <div class="fc"><div class="fi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3 class="ftl">Developmental calendar</h3><p class="fdesc">Plan by the day, month, quarter, or year. Recurring classes sit alongside one-time events. The calendar becomes your child's developmental record as you log outcomes.</p></div>
+    <div class="fc" style="grid-column:span 2"><div class="fi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="ftl">Caregiver mode — no login, no decisions</h3><p class="fdesc">Share a 6-character code. Grandma opens the link. She sees today's plan — already made for her. What to do. What to say to start. What success looks like. She executes. She doesn't decide. She feels capable. You see what happened.</p></div>
+  </div>
+</section>
+
+<section class="surv">
+  <div class="sey">Help us build this for you</div>
+  <h2 class="sh">Tell us what you need.</h2>
+  <p class="ss">Real parent feedback goes directly into what we ship first.</p>
+  <form class="sg" name="survey" netlify netlify-honeypot="bfs" onsubmit="hs(event)">
     <input type="hidden" name="form-name" value="survey">
-    <p style="display:none"><input name="bot-field-survey"></p>
-    <div class="survey-q"><label for="child_age">How old is your child?</label><select name="child_age" id="child_age"><option value="">Select age range</option><option>Under 2</option><option>2–4 years</option><option>4–6 years</option><option>6–9 years</option><option>9–12 years</option><option>12+ years</option><option>Multiple ages</option></select></div>
-    <div class="survey-q"><label for="neurodivergent">Any neurodevelopmental differences?</label><select name="neurodivergent" id="neurodivergent"><option value="">Select</option><option>No</option><option>Yes — autism</option><option>Yes — ADHD</option><option>Yes — sensory processing</option><option>Yes — other</option><option>Under evaluation</option><option>Prefer not to say</option></select></div>
-    <div class="survey-q wide"><label for="frustration">What's your biggest frustration finding quality activities for your child?</label><textarea name="frustration" id="frustration" placeholder="Be honest — what takes the most time or feels hardest?"></textarea></div>
-    <div class="survey-q wide"><label>Which would help you most? Select all that apply.</label><div class="survey-checks"><label class="check-opt"><input type="checkbox" name="need" value="development_view"> Seeing where my child is developmentally and what's next</label><label class="check-opt"><input type="checkbox" name="need" value="lesson_library"> All quality activities from different sources in one place</label><label class="check-opt"><input type="checkbox" name="need" value="quality_filter"> A reliable quality filter so I know what's actually good</label><label class="check-opt"><input type="checkbox" name="need" value="calendar"> A calendar that connects activities to developmental goals</label><label class="check-opt"><input type="checkbox" name="need" value="caregiver"> Tools for grandparents, sitters, or others to engage meaningfully</label><label class="check-opt"><input type="checkbox" name="need" value="struggle_areas"> Knowing where my child struggles and what to do about it</label></div></div>
-    <div class="survey-q"><label for="price_point">What would you pay per month?</label><select name="price_point" id="price_point"><option value="">Select</option><option>Nothing — I expect free</option><option>$5–10/month</option><option>$10–20/month</option><option>$20–30/month</option><option>More if it's genuinely useful</option></select></div>
-    <div class="survey-q"><label for="survey_email">Your email (to receive beta access)</label><input type="text" name="email" id="survey_email" placeholder="email@example.com" autocomplete="email"></div>
-    <div class="survey-q wide"><label for="other">Anything else?</label><textarea name="other" id="other" placeholder="Feature requests, concerns, what you've tried and why it didn't work..."></textarea></div>
-    <div class="survey-submit"><button type="submit">Submit feedback</button><div class="form-success" id="survey-success" style="margin-top:var(--sp-3)" role="status" aria-live="polite">✓ Thank you — this goes straight into our planning.</div></div>
+    <p style="display:none"><input name="bfs"></p>
+    <div class="sq"><label for="ca">How old is your child?</label><select name="child_age" id="ca"><option value="">Select age range</option><option>Under 2</option><option>2–4 years</option><option>4–6 years</option><option>6–9 years</option><option>9–12 years</option><option>12+ years</option><option>Multiple ages</option></select></div>
+    <div class="sq"><label for="nd">Any neurodevelopmental differences?</label><select name="neurodivergent" id="nd"><option value="">Select</option><option>No</option><option>Yes — autism</option><option>Yes — ADHD</option><option>Yes — sensory processing</option><option>Yes — other</option><option>Under evaluation</option><option>Prefer not to say</option></select></div>
+    <div class="sq w"><label for="frust">What's your biggest frustration finding quality activities?</label><textarea name="frustration" id="frust" placeholder="Be honest — what takes the most time or feels hardest?"></textarea></div>
+    <div class="sq w"><label>Which would help you most? Select all that apply.</label>
+      <div class="cks">
+        <label class="co"><input type="checkbox" name="need" value="development_view"> Seeing where my child is developmentally and what's next</label>
+        <label class="co"><input type="checkbox" name="need" value="lesson_library"> All quality activities from different sources in one place</label>
+        <label class="co"><input type="checkbox" name="need" value="quality_filter"> A reliable quality filter so I know what's actually good</label>
+        <label class="co"><input type="checkbox" name="need" value="calendar"> A calendar connecting activities to developmental goals</label>
+        <label class="co"><input type="checkbox" name="need" value="caregiver"> Tools for grandparents, sitters, others to engage meaningfully</label>
+        <label class="co"><input type="checkbox" name="need" value="struggle_areas"> Knowing where my child struggles and what to do about it</label>
+      </div>
+    </div>
+    <div class="sq"><label for="pp">What would you pay per month?</label><select name="price_point" id="pp"><option value="">Select</option><option>Nothing — I expect free</option><option>$5–10/month</option><option>$10–20/month</option><option>$20–30/month</option><option>More if it's genuinely useful</option></select></div>
+    <div class="sq"><label for="se">Your email (to receive beta access)</label><input type="text" name="email" id="se" placeholder="email@example.com" autocomplete="email"></div>
+    <div class="sq w"><label for="ot">Anything else?</label><textarea name="other" id="ot" placeholder="Feature requests, concerns, what you've tried and why it didn't work..."></textarea></div>
+    <div class="sub"><button type="submit">Submit feedback</button><div class="fs" id="ss" style="margin-top:12px" role="status">✓ Thank you — this goes straight into our planning.</div></div>
   </form>
 </section>
 
-<section class="final-cta" aria-label="Final waitlist call to action">
-  <div class="section-eyebrow">Summer 2026</div>
-  <h2 class="section-headline">Summer is here.<br>Parents needed this yesterday.</h2>
-  <p class="section-sub">Free beta. Opens in 2 weeks. Limited spots.</p>
-  <form class="final-form" name="waitlist-bottom" netlify onsubmit="handleWaitlistBottom(event)">
+<section class="cta">
+  <div class="sey">Summer 2026</div>
+  <h2 class="sh">Summer is here.<br>Parents needed this yesterday.</h2>
+  <p class="ss">Free beta. Opens in 2 weeks. Limited spots.</p>
+  <form class="ff" name="waitlist-bottom" netlify onsubmit="hb(event)">
     <input type="hidden" name="form-name" value="waitlist-bottom">
     <input type="email" name="email" placeholder="Your email address" required autocomplete="email">
     <button type="submit">Join beta</button>
@@ -316,33 +313,33 @@
 </section>
 
 <footer>
-  <div class="footer-mark">Hew<span>.</span></div>
-  <p class="footer-note">© 2026 Hew · thehew.app · Building for families, by a family.</p>
+  <div class="fm">Hew<span>.</span></div>
+  <p class="fnote">© 2026 Hew · thehew.app · Building for families, by a family.</p>
 </footer>
 
 <script>
-  const C=['#0EA5E9','#F59E0B','#8B5CF6','#F43F5E','#10B981'],E='#E7E5E4';
-  function badge(el,sz,scored){
-    if(!el)return;
-    const cx=sz/2,cy=sz/2,oR=sz*.44,iR=sz*.26,gap=6;
-    el.setAttribute('width',sz);el.setAttribute('height',sz);el.setAttribute('viewBox',`0 0 ${sz} ${sz}`);
-    let h='';
-    for(let i=0;i<5;i++){
-      const s=i*72+gap/2,e=(i+1)*72-gap/2;
-      const p=(d,r)=>{const a=(d-90)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)];};
-      const[ox1,oy1]=p(s,oR),[ox2,oy2]=p(e,oR),[ix1,iy1]=p(s,iR),[ix2,iy2]=p(e,iR);
-      h+=`<path d="M${ox1},${oy1} A${oR},${oR} 0 0 1 ${ox2},${oy2} L${ix2},${iy2} A${iR},${iR} 0 0 0 ${ix1},${iy1} Z" fill="${scored[i]?C[i]:E}"/>`;
-    }
-    el.innerHTML=h;
+const C=['#0EA5E9','#F59E0B','#8B5CF6','#F43F5E','#10B981'],E='rgba(42,80,64,0.5)';
+function badge(el,sz,s){
+  if(!el)return;
+  const cx=sz/2,cy=sz/2,oR=sz*.44,iR=sz*.26,g=6;
+  el.setAttribute('viewBox',`0 0 ${sz} ${sz}`);
+  let h='';
+  for(let i=0;i<5;i++){
+    const a=i*72+g/2,b=(i+1)*72-g/2;
+    const p=(d,r)=>{const t=(d-90)*Math.PI/180;return[cx+r*Math.cos(t),cy+r*Math.sin(t)];};
+    const[x1,y1]=p(a,oR),[x2,y2]=p(b,oR),[x3,y3]=p(a,iR),[x4,y4]=p(b,iR);
+    h+=`<path d="M${x1},${y1} A${oR},${oR} 0 0 1 ${x2},${y2} L${x4},${y4} A${iR},${iR} 0 0 0 ${x3},${y3} Z" fill="${s[i]?C[i]:E}"/>`;
   }
-  badge(document.getElementById('b1'),12,[true,true,true,true,false]);
-  badge(document.getElementById('b2'),12,[false,false,false,false,false]);
-  badge(document.getElementById('b3'),12,[true,true,true,true,true]);
-  badge(document.getElementById('feat-badge'),20,[true,true,true,true,true]);
-  function post(fd){return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()});}
-  function handleWaitlist(e){e.preventDefault();post(new FormData(e.target)).finally(()=>{document.getElementById('waitlist-success').style.display='block';e.target.reset();});}
-  function handleSurvey(e){e.preventDefault();post(new FormData(e.target)).finally(()=>{document.getElementById('survey-success').style.display='block';});}
-  function handleWaitlistBottom(e){e.preventDefault();const b=e.target.querySelector('button');b.textContent="✓ You're in!";b.style.background='#10B981';b.style.color='white';post(new FormData(e.target));}
+  el.innerHTML=h;
+}
+badge(document.getElementById('b1'),12,[1,1,1,1,0]);
+badge(document.getElementById('b2'),12,[0,0,0,0,0]);
+badge(document.getElementById('b3'),12,[1,1,1,1,1]);
+badge(document.getElementById('fb'),20,[1,1,1,1,1]);
+function post(f){return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(f).toString()});}
+function hw(e){e.preventDefault();post(new FormData(e.target)).finally(()=>{document.getElementById('ws').style.display='block';e.target.reset();});}
+function hs(e){e.preventDefault();post(new FormData(e.target)).finally(()=>{document.getElementById('ss').style.display='block';});}
+function hb(e){e.preventDefault();const b=e.target.querySelector('button');b.textContent="✓ You're in!";b.style.background='#10B981';b.style.color='white';post(new FormData(e.target));}
 </script>
 </body>
 </html>

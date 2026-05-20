@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hew — Every moment counts.</title>
+  <meta name="description" content="See exactly where your child is, where they're heading, and what to do about it. Hew maps your child's development against real frameworks and brings every quality enrichment activity into one place.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* LOCKED DESIGN TOKENS — kombra-operations/shared-infrastructure/DESIGN_SYSTEM_LOCKED.md */
+    :root {
+      --kc-bg-primary:#FFF9F2; --kc-bg-secondary:#F3EBE1; --kc-bg-elevated:#FFFFFF; --kc-bg-inverse:#292524;
+      --kc-text-primary:#1C1917; --kc-text-secondary:#57534E; --kc-text-tertiary:#78716C; --kc-text-inverse:#FAFAF9;
+      --kc-brand-primary:#CA5C3B; --kc-brand-secondary:#E6A371; --kc-brand-accent:#4338CA;
+      --kc-success:#166534; --kc-warning:#9A3412; --kc-error:#9F1239; --kc-rule:#E7E5E4;
+      --kc-radius-sm:8px; --kc-radius-md:16px; --kc-radius-lg:24px; --kc-radius-pill:999px; --kc-border-width:2px;
+      --check-rigor:#0EA5E9; --check-inclusivity:#F59E0B; --check-perspective:#8B5CF6; --check-empathy:#F43F5E; --check-thinking:#10B981;
+      --ease-ui:cubic-bezier(0.4,0,0.2,1); --ease-enter:cubic-bezier(0.0,0,0.2,1); --ease-exit:cubic-bezier(0.4,0,1,1);
+      --dur-instant:100ms; --dur-fast:200ms; --dur-med:300ms; --dur-slow:500ms;
+      --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+      --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-20:80px; --sp-24:96px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    /* Fraunces optical sizing — required for distinctive rendering */
+    .nav-wordmark,.hero-headline,.section-headline,.step-num,.step-title,
+    .tlm-letter,.tlm-name,.feature-title,.footer-mark,.mock-greeting,.mock-child-name,.mock-lesson-title{font-optical-sizing:auto;}
+    body{background:var(--kc-bg-primary);color:var(--kc-text-primary);font-family:'Inter',sans-serif;font-size:18px;line-height:1.6;overflow-x:hidden;}
+    .datum-line{height:2px;background:var(--kc-brand-accent);width:100%;position:fixed;top:0;left:0;z-index:200;}
+    nav{position:fixed;top:2px;left:0;right:0;z-index:100;padding:var(--sp-4) var(--sp-12);display:flex;justify-content:space-between;align-items:center;background:rgba(255,249,242,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--kc-rule);}
+    .nav-wordmark{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 24,'wght' 700;font-size:24px;font-weight:700;letter-spacing:-0.03em;color:var(--kc-text-primary);}
+    .nav-wordmark span{color:var(--kc-brand-primary);}
+    .nav-cta{background:var(--kc-brand-primary);color:var(--kc-text-inverse);padding:var(--sp-3) var(--sp-6);border-radius:var(--kc-radius-sm);font-size:13px;font-weight:600;text-decoration:none;transition:background var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);}
+    .nav-cta:hover{background:var(--kc-brand-secondary);}
+    .nav-cta:active{transform:scale(0.97);}
+    .nav-cta:focus-visible{outline:2px solid var(--kc-brand-primary);outline-offset:2px;}
+    .hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;padding-top:66px;}
+    .hero-left{padding:var(--sp-24) var(--sp-12);display:flex;flex-direction:column;justify-content:center;}
+    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--kc-brand-primary);margin-bottom:var(--sp-6);opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.1s forwards;}
+    .hero-headline{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 72,'wght' 600;font-size:clamp(44px,5.5vw,72px);font-weight:600;line-height:1.0;letter-spacing:-0.03em;color:var(--kc-text-primary);margin-bottom:var(--sp-4);opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.2s forwards;}
+    .hero-headline em{font-weight:300;font-style:italic;color:var(--kc-text-tertiary);}
+    .hero-sub{font-size:18px;line-height:1.65;color:var(--kc-text-secondary);margin-bottom:var(--sp-10);max-width:480px;opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.35s forwards;}
+    .hero-sub strong{color:var(--kc-text-primary);font-weight:600;}
+    .waitlist-form{display:flex;flex-direction:column;gap:var(--sp-3);max-width:440px;opacity:0;animation:fadeUp var(--dur-slow) var(--ease-enter) 0.5s forwards;}
+    .form-row{display:flex;gap:var(--sp-2);}
+    .waitlist-form input[type="email"]{flex:1;padding:var(--sp-4) var(--sp-5);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-sm);font-size:15px;font-family:'Inter',sans-serif;background:var(--kc-bg-elevated);color:var(--kc-text-primary);outline:none;transition:border-color var(--dur-fast) var(--ease-ui);}
+    .waitlist-form input[type="email"]:focus{border-color:var(--kc-brand-primary);box-shadow:0 0 0 3px rgba(202,92,59,0.12);}
+    .waitlist-form input::placeholder{color:var(--kc-text-tertiary);}
+    .btn-primary{padding:var(--sp-4) var(--sp-8);background:var(--kc-text-primary);color:var(--kc-bg-primary);border:none;border-radius:var(--kc-radius-sm);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:background var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);white-space:nowrap;}
+    .btn-primary:hover{background:var(--kc-brand-primary);}
+    .btn-primary:active{transform:scale(0.97);}
+    .btn-primary:focus-visible{outline:2px solid var(--kc-brand-primary);outline-offset:2px;}
+    .form-note{font-size:13px;color:var(--kc-text-tertiary);}
+    .form-success{display:none;background:rgba(22,101,52,0.08);border:var(--kc-border-width) solid #166534;border-radius:var(--kc-radius-sm);padding:var(--sp-4) var(--sp-5);font-size:14px;font-weight:600;color:var(--kc-success);}
+    .hero-right{background:var(--kc-bg-secondary);display:flex;align-items:center;justify-content:center;padding:var(--sp-16) var(--sp-8);position:relative;overflow:hidden;}
+    .hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(145deg,transparent 60%,rgba(202,92,59,0.06) 100%);pointer-events:none;}
+    .phone-wrap{display:flex;gap:var(--sp-5);align-items:flex-start;position:relative;z-index:1;}
+    .phone{width:210px;background:var(--kc-bg-elevated);border-radius:var(--kc-radius-lg);border:var(--kc-border-width) solid #D6D3D1;box-shadow:0 1px 2px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.06),0 20px 48px rgba(0,0,0,0.10);overflow:hidden;flex-shrink:0;}
+    .phone.offset{margin-top:var(--sp-12);}
+    .phone-notch{background:var(--kc-text-primary);height:24px;display:flex;align-items:center;justify-content:center;}
+    .notch-pill{width:60px;height:6px;border-radius:var(--kc-radius-pill);background:#3D3533;}
+    .phone-datum{height:2px;background:var(--kc-brand-accent);}
+    .phone-screen{background:var(--kc-bg-primary);padding:var(--sp-3);min-height:360px;}
+    .mock-greeting{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:17px;font-weight:600;color:var(--kc-text-primary);}
+    .mock-date{font-size:10px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-3);}
+    .mock-child-card{background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);padding:var(--sp-3);margin-bottom:var(--sp-3);}
+    .mock-child-name{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--kc-text-primary);line-height:1;}
+    .mock-child-age{font-size:9px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-2);margin-top:2px;}
+    .mock-interest{display:inline-flex;align-items:center;gap:var(--sp-1);background:var(--kc-bg-secondary);padding:2px var(--sp-2);border-radius:var(--kc-radius-pill);font-size:9px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-2);}
+    .mock-interest-dot{width:5px;height:5px;border-radius:50%;background:var(--kc-brand-primary);}
+    .mock-skill{font-size:10px;font-weight:500;color:var(--kc-text-primary);margin-bottom:var(--sp-2);}
+    .mock-btn{display:block;background:var(--kc-brand-primary);color:var(--kc-text-inverse);padding:var(--sp-2) var(--sp-3);border-radius:var(--kc-radius-sm);font-size:10px;font-weight:600;text-align:center;}
+    .mock-label{font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--kc-text-tertiary);margin-bottom:var(--sp-2);}
+    .mock-domain-row{display:flex;align-items:center;gap:var(--sp-2);margin-bottom:var(--sp-1);}
+    .mock-domain-name{font-size:9px;font-weight:500;color:var(--kc-text-secondary);width:40px;flex-shrink:0;}
+    .mock-bar-track{flex:1;height:4px;background:var(--kc-rule);border-radius:var(--kc-radius-pill);overflow:hidden;}
+    .mock-bar{height:100%;border-radius:var(--kc-radius-pill);}
+    .mock-bar.think{background:var(--check-rigor);}
+    .mock-bar.relate{background:var(--check-empathy);}
+    .mock-bar.move{background:var(--check-thinking);}
+    .mock-bar-val{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--kc-text-tertiary);width:18px;text-align:right;}
+    .mock-alert{margin-top:var(--sp-2);background:rgba(202,92,59,0.08);border:1px solid rgba(202,92,59,0.2);border-radius:var(--kc-radius-sm);padding:var(--sp-2);font-size:9px;color:var(--kc-warning);font-weight:500;line-height:1.4;}
+    .mock-search{background:var(--kc-bg-secondary);border-radius:var(--kc-radius-sm);padding:var(--sp-2);font-size:9px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-3);}
+    .mock-lesson-card{background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);padding:var(--sp-2) var(--sp-3);margin-bottom:var(--sp-2);}
+    .mock-lesson-meta{display:flex;justify-content:space-between;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--kc-text-tertiary);margin-bottom:var(--sp-1);}
+    .mock-lesson-title{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:11px;font-weight:600;color:var(--kc-text-primary);line-height:1.3;margin-bottom:3px;}
+    .mock-lesson-source{font-size:8px;color:var(--kc-text-tertiary);margin-bottom:var(--sp-2);}
+    .mock-lesson-foot{display:flex;align-items:center;justify-content:space-between;padding-top:var(--sp-2);border-top:1px solid var(--kc-rule);}
+    .mock-lesson-checks{display:flex;align-items:center;gap:3px;font-size:8px;font-weight:700;color:var(--kc-text-primary);}
+    .mock-add{font-size:8px;font-weight:600;color:var(--kc-brand-primary);}
+    section{padding:var(--sp-24) var(--sp-12);}
+    .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--kc-brand-primary);margin-bottom:var(--sp-4);}
+    .section-headline{font-family:'Fraunces',serif;font-optical-sizing:auto;font-variation-settings:'opsz' 48,'wght' 600;font-size:clamp(32px,4vw,52px);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:var(--kc-text-primary);margin-bottom:var(--sp-5);}
+    .section-sub{font-size:18px;color:var(--kc-text-secondary);line-height:1.65;max-width:560px;margin-bottom:var(--sp-12);}
+    .how-section{background:var(--kc-bg-inverse);}
+    .how-section .section-eyebrow{color:var(--kc-brand-secondary);}
+    .how-section .section-headline{color:var(--kc-text-inverse);}
+    .how-section .section-sub{color:rgba(250,250,249,0.55);}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-6);}
+    .step{padding:var(--sp-8);background:rgba(250,250,249,0.05);border:1px solid rgba(250,250,249,0.08);border-radius:var(--kc-radius-md);}
+    .step-num{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:52px;font-weight:600;color:var(--kc-brand-primary);opacity:0.5;line-height:1;margin-bottom:var(--sp-5);}
+    .step-title{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:600;color:var(--kc-text-inverse);margin-bottom:var(--sp-3);}
+    .step-desc{font-size:15px;color:rgba(250,250,249,0.45);line-height:1.65;}
+    .frameworks{background:var(--kc-bg-primary);}
+    .framework-tags{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-12);}
+    .framework-tag{padding:var(--sp-2) var(--sp-4);background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-sm);font-size:13px;font-weight:600;color:var(--kc-text-secondary);}
+    .framework-tag.active{background:var(--kc-brand-primary);color:var(--kc-text-inverse);border-color:var(--kc-brand-primary);}
+    .tlm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5);}
+    .tlm-card{padding:var(--sp-8);border-radius:var(--kc-radius-lg);border:var(--kc-border-width) solid var(--kc-rule);background:var(--kc-bg-elevated);}
+    .tlm-letter{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:40px;font-weight:700;line-height:1;margin-bottom:var(--sp-4);}
+    .tlm-card.think .tlm-letter{color:var(--check-rigor);}
+    .tlm-card.relate .tlm-letter{color:var(--check-empathy);}
+    .tlm-card.move .tlm-letter{color:var(--check-thinking);}
+    .tlm-name{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:22px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-3);}
+    .tlm-desc{font-size:14px;color:var(--kc-text-secondary);line-height:1.65;margin-bottom:var(--sp-4);}
+    .tlm-domains{display:flex;flex-wrap:wrap;gap:var(--sp-1);}
+    .tlm-domain{padding:2px var(--sp-2);background:var(--kc-bg-secondary);border-radius:var(--kc-radius-sm);font-size:11px;font-weight:600;color:var(--kc-text-tertiary);}
+    .features-section{background:var(--kc-bg-secondary);}
+    .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5);}
+    .feature-card{padding:var(--sp-8);background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);}
+    .feature-card.warm{background:var(--kc-bg-primary);border-color:transparent;}
+    .feature-icon{width:40px;height:40px;border-radius:var(--kc-radius-sm);background:var(--kc-brand-primary);margin-bottom:var(--sp-5);display:flex;align-items:center;justify-content:center;}
+    .feature-icon.dark{background:var(--kc-bg-inverse);}
+    .feature-icon.accent{background:var(--kc-brand-accent);}
+    .feature-title{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-3);line-height:1.2;}
+    .feature-desc{font-size:15px;color:var(--kc-text-secondary);line-height:1.65;}
+    .survey-section{background:var(--kc-bg-primary);}
+    .survey-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);}
+    .survey-q{padding:var(--sp-6);background:var(--kc-bg-elevated);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-md);}
+    .survey-q.wide{grid-column:span 2;}
+    .survey-q label{display:block;font-size:14px;font-weight:600;color:var(--kc-text-primary);margin-bottom:var(--sp-3);}
+    .survey-q select,.survey-q textarea,.survey-q input[type="text"]{width:100%;padding:var(--sp-3) var(--sp-4);border:var(--kc-border-width) solid var(--kc-rule);border-radius:var(--kc-radius-sm);font-size:14px;font-family:'Inter',sans-serif;color:var(--kc-text-primary);background:var(--kc-bg-primary);outline:none;transition:border-color var(--dur-fast) var(--ease-ui);}
+    .survey-q select:focus,.survey-q textarea:focus,.survey-q input[type="text"]:focus{border-color:var(--kc-brand-primary);box-shadow:0 0 0 3px rgba(202,92,59,0.1);}
+    .survey-q textarea{resize:vertical;min-height:80px;}
+    .survey-checks{display:flex;flex-direction:column;gap:var(--sp-2);}
+    .check-opt{display:flex;align-items:flex-start;gap:var(--sp-3);cursor:pointer;font-size:14px;color:var(--kc-text-primary);line-height:1.5;}
+    .check-opt input{accent-color:var(--kc-brand-primary);width:16px;height:16px;margin-top:2px;flex-shrink:0;}
+    .check-opt:focus-within{outline:2px solid var(--kc-brand-primary);border-radius:2px;}
+    .survey-submit{grid-column:span 2;}
+    .survey-submit button{padding:var(--sp-4) var(--sp-8);background:var(--kc-brand-primary);color:var(--kc-text-inverse);border:none;border-radius:var(--kc-radius-sm);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:background var(--dur-fast) var(--ease-ui),transform var(--dur-instant) var(--ease-ui);}
+    .survey-submit button:hover{background:var(--kc-text-primary);}
+    .survey-submit button:active{transform:scale(0.97);}
+    .survey-submit button:focus-visible{outline:2px solid var(--kc-brand-primary);outline-offset:2px;}
+    .final-cta{background:var(--kc-bg-inverse);text-align:center;padding:var(--sp-24) var(--sp-12);}
+    .final-cta .section-eyebrow{color:var(--kc-brand-secondary);}
+    .final-cta .section-headline{color:var(--kc-text-inverse);max-width:560px;margin:0 auto var(--sp-4);}
+    .final-cta .section-sub{color:rgba(250,250,249,0.5);margin:0 auto var(--sp-12);text-align:center;}
+    .final-form{display:flex;gap:var(--sp-2);max-width:420px;margin:0 auto;justify-content:center;}
+    .final-form input[type="email"]{flex:1;padding:var(--sp-4) var(--sp-5);border:var(--kc-border-width) solid rgba(250,250,249,0.15);border-radius:var(--kc-radius-sm);font-size:15px;font-family:'Inter',sans-serif;background:rgba(250,250,249,0.08);color:var(--kc-text-inverse);outline:none;}
+    .final-form input::placeholder{color:rgba(250,250,249,0.35);}
+    .final-form button{padding:var(--sp-4) var(--sp-6);background:var(--kc-brand-primary);color:var(--kc-text-inverse);border:none;border-radius:var(--kc-radius-sm);font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;}
+    .final-form button:hover{background:var(--kc-brand-secondary);color:var(--kc-text-primary);}
+    footer{background:var(--kc-bg-inverse);padding:var(--sp-8) var(--sp-12);display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(250,250,249,0.08);}
+    .footer-mark{font-family:'Fraunces',serif;font-optical-sizing:auto;font-size:20px;font-weight:700;color:var(--kc-text-inverse);letter-spacing:-0.02em;}
+    .footer-mark span{color:var(--kc-brand-secondary);}
+    .footer-note{font-size:12px;color:rgba(250,250,249,0.3);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    @media(max-width:1024px){
+      .hero{grid-template-columns:1fr;} .hero-right{min-height:420px;}
+      .steps,.tlm-cards,.features-grid,.survey-grid{grid-template-columns:1fr;}
+      .survey-q.wide,.survey-submit{grid-column:span 1;}
+      nav{padding:var(--sp-4) var(--sp-5);} section{padding:var(--sp-16) var(--sp-5);}
+      .hero-left{padding:var(--sp-16) var(--sp-5);} .form-row,.final-form{flex-direction:column;}
+      footer{flex-direction:column;gap:var(--sp-3);text-align:center;}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+  </style>
+</head>
+<body>
+<div class="datum-line" role="presentation"></div>
+<nav aria-label="Main navigation">
+  <div class="nav-wordmark" aria-label="Hew">Hew<span>.</span></div>
+  <a class="nav-cta" href="#waitlist">Join the beta</a>
+</nav>
+
+<section class="hero" id="waitlist" aria-label="Hero and waitlist signup">
+  <div class="hero-left">
+    <p class="hero-eyebrow" aria-hidden="true">Summer 2026 Beta — Opens in 2 weeks</p>
+    <h1 class="hero-headline">Every moment<br><em>counts.</em></h1>
+    <p class="hero-sub">See exactly where your child is, where they're heading, and what to do about it — with activities from everywhere quality enrichment lives, mapped to their development, scheduled in the time you have.<br><br><strong>Free beta. Limited spots. Summer starts now.</strong></p>
+    <form class="waitlist-form" name="waitlist" netlify netlify-honeypot="bot-field" onsubmit="handleWaitlist(event)" aria-label="Waitlist signup form">
+      <input type="hidden" name="form-name" value="waitlist">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
+        <button type="submit" class="btn-primary">Join waitlist</button>
+      </div>
+      <p class="form-note">No spam. Beta invite in 2 weeks. Unsubscribe anytime.</p>
+      <div class="form-success" id="waitlist-success" role="status" aria-live="polite">✓ You're on the list. Beta invite coming soon.</div>
+    </form>
+  </div>
+  <div class="hero-right" aria-hidden="true">
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"><div class="notch-pill"></div></div>
+        <div class="phone-datum"></div>
+        <div class="phone-screen">
+          <div class="mock-greeting">Good morning</div>
+          <div class="mock-date">Saturday · June 28</div>
+          <div class="mock-child-card">
+            <div class="mock-child-name">Zain</div>
+            <div class="mock-child-age">4 years 6 months</div>
+            <div class="mock-interest"><div class="mock-interest-dot"></div>Dinosaurs</div>
+            <div class="mock-skill">Working on: Phoneme blending</div>
+            <div class="mock-btn">Start a session →</div>
+          </div>
+          <div class="mock-label">Development snapshot</div>
+          <div class="mock-domain-row"><div class="mock-domain-name">Think</div><div class="mock-bar-track"><div class="mock-bar think" style="width:62%"></div></div><div class="mock-bar-val">3.1</div></div>
+          <div class="mock-domain-row"><div class="mock-domain-name">Relate</div><div class="mock-bar-track"><div class="mock-bar relate" style="width:78%"></div></div><div class="mock-bar-val">3.9</div></div>
+          <div class="mock-domain-row"><div class="mock-domain-name">Move</div><div class="mock-bar-track"><div class="mock-bar move" style="width:85%"></div></div><div class="mock-bar-val">4.2</div></div>
+          <div class="mock-alert">⚠ Literacy — Phoneme awareness below expected range for 54 months</div>
+        </div>
+      </div>
+      <div class="phone offset">
+        <div class="phone-notch"><div class="notch-pill"></div></div>
+        <div class="phone-datum"></div>
+        <div class="phone-screen">
+          <div class="mock-label">Lesson library</div>
+          <div class="mock-search">🔍 Search for Zain...</div>
+          <div class="mock-lesson-card">
+            <div class="mock-lesson-meta"><span>Literacy · 3–5</span><span>Khan Kids</span></div>
+            <div class="mock-lesson-title">Letter sounds: Beginning phonemes</div>
+            <div class="mock-lesson-source">free</div>
+            <div class="mock-lesson-foot"><div class="mock-lesson-checks"><svg width="12" height="12" viewBox="0 0 40 40" id="b1"></svg> 4.2</div><div class="mock-add">+ Calendar</div></div>
+          </div>
+          <div class="mock-lesson-card">
+            <div class="mock-lesson-meta"><span>Literacy · 4–6</span><span>TPT</span></div>
+            <div class="mock-lesson-title">Rhyming rockets: Phonemic awareness games</div>
+            <div class="mock-lesson-source">$3.50</div>
+            <div class="mock-lesson-foot"><div class="mock-lesson-checks"><svg width="12" height="12" viewBox="0 0 40 40" id="b2"></svg> Not scored</div><div class="mock-add">Score it →</div></div>
+          </div>
+          <div class="mock-lesson-card">
+            <div class="mock-lesson-meta"><span>Literacy · 3–5</span><span>PBS Kids</span></div>
+            <div class="mock-lesson-title">Word families with Elmo</div>
+            <div class="mock-lesson-source">free</div>
+            <div class="mock-lesson-foot"><div class="mock-lesson-checks"><svg width="12" height="12" viewBox="0 0 40 40" id="b3"></svg> 5.0</div><div class="mock-add">+ Calendar</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-section" aria-label="How Hew works">
+  <div class="section-eyebrow">How it works</div>
+  <h2 class="section-headline">Built around your child.<br>Ready for your Saturday.</h2>
+  <p class="section-sub">Tell us who your child is. We show you where they are, where to go next, and what to do about it.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h3 class="step-title">Build your child's profile</h3><p class="step-desc">Age, interests, any developmental notes. Four minutes. Hew maps their development against CDC milestones, CASEL standards, and grade-level academic frameworks immediately.</p></div>
+    <div class="step"><div class="step-num">02</div><h3 class="step-title">See where they are and what's next</h3><p class="step-desc">A clear view of where your child is strong, where they need more work, and their rate of progress. Not a score — a trajectory. Updated every time you log an activity.</p></div>
+    <div class="step"><div class="step-num">03</div><h3 class="step-title">Find it. Score it. Plan the year.</h3><p class="step-desc">Every quality enrichment activity from Khan Academy, TPT, PBS, museums, and libraries — in one place. Scheduled by the day, month, or quarter against your child's developmental goals.</p></div>
+  </div>
+</section>
+
+<section class="frameworks" aria-label="Developmental frameworks">
+  <div class="section-eyebrow">Built on validated science</div>
+  <h2 class="section-headline">Real frameworks.<br>Not invented categories.</h2>
+  <p class="section-sub">Your child's development mapped against the standards pediatricians, schools, and researchers actually use — at every stage from birth through high school.</p>
+  <div class="framework-tags">
+    <div class="framework-tag active">CDC Developmental Milestones</div>
+    <div class="framework-tag">CASEL Social-Emotional Learning</div>
+    <div class="framework-tag">Common Core ELA & Math</div>
+    <div class="framework-tag">Next Generation Science Standards</div>
+    <div class="framework-tag">Head Start ELOF</div>
+    <div class="framework-tag">National PE Standards</div>
+  </div>
+  <div class="tlm-cards">
+    <div class="tlm-card think"><div class="tlm-letter">T</div><h3 class="tlm-name">Think</h3><p class="tlm-desc">How your child reasons, reads, counts, and makes sense of the world.</p><div class="tlm-domains"><span class="tlm-domain">Literacy</span><span class="tlm-domain">Numeracy</span><span class="tlm-domain">Science</span><span class="tlm-domain">Executive Function</span><span class="tlm-domain">Reasoning</span></div></div>
+    <div class="tlm-card relate"><div class="tlm-letter">R</div><h3 class="tlm-name">Relate</h3><p class="tlm-desc">How your child connects with others, manages emotions, and communicates.</p><div class="tlm-domains"><span class="tlm-domain">Social-Emotional</span><span class="tlm-domain">Communication</span><span class="tlm-domain">Empathy</span><span class="tlm-domain">Self-Regulation</span></div></div>
+    <div class="tlm-card move"><div class="tlm-letter">M</div><h3 class="tlm-name">Move</h3><p class="tlm-desc">How your child develops physically — from big movements to fine motor control.</p><div class="tlm-domains"><span class="tlm-domain">Gross Motor</span><span class="tlm-domain">Fine Motor</span><span class="tlm-domain">Sensory</span><span class="tlm-domain">Physical Health</span></div></div>
+  </div>
+</section>
+
+<section class="features-section" aria-label="Hew features">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-headline">Everything in one place.</h2>
+  <p class="section-sub">The development map. The library. The calendar. The caregiver plan. All connected.</p>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/></svg></div><h3 class="feature-title">Development dashboard</h3><p class="feature-desc">Your child's progress across every domain, mapped to validated frameworks. Full view or Think / Relate / Move. See where they're strong. See where they need work. See the rate of movement over time.</p></div>
+    <div class="feature-card warm"><div class="feature-icon dark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><h3 class="feature-title">Lesson library</h3><p class="feature-desc">Every quality enrichment activity from Khan Academy, Teachers Pay Teachers, PBS Kids, museum curricula, and library programs — in one place. Tagged by age and domain. Direct link to the provider. No content hosted. Always up to date.</p></div>
+    <div class="feature-card warm"><div class="feature-icon accent"><svg width="20" height="20" viewBox="0 0 40 40" id="feat-badge"></svg></div><h3 class="feature-title">Five Checks quality scoring</h3><p class="feature-desc">Every lesson is scored across five dimensions: Rigor, Inclusivity, Perspective, Empathy, Critical Thinking. The AI scores lessons automatically. Parents refine scores and add context — turning a 2.5 into a 5.</p></div>
+    <div class="feature-card"><div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3 class="feature-title">Developmental calendar</h3><p class="feature-desc">Plan by the day, month, quarter, or year. Recurring classes — swim lessons, gymnastics — sit alongside one-time events and open activity slots. The calendar becomes your child's developmental record as you log outcomes.</p></div>
+    <div class="feature-card" style="grid-column:span 2"><div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="feature-title">Caregiver mode — no login, no decisions</h3><p class="feature-desc">Share a 6-character code. Grandma opens the link. She sees today's plan — already made for her, based on your child's profile and regulation windows. What to do. What to say to start. What success looks like. What to do if it goes sideways. She executes. She doesn't decide. She feels capable. You see what happened.</p></div>
+  </div>
+</section>
+
+<section class="survey-section" aria-label="Feedback survey">
+  <div class="section-eyebrow">Help us build this for you</div>
+  <h2 class="section-headline">Tell us what you need.</h2>
+  <p class="section-sub">Real parent feedback goes directly into what we ship first.</p>
+  <form class="survey-grid" name="survey" netlify netlify-honeypot="bot-field-survey" onsubmit="handleSurvey(event)">
+    <input type="hidden" name="form-name" value="survey">
+    <p style="display:none"><input name="bot-field-survey"></p>
+    <div class="survey-q"><label for="child_age">How old is your child?</label><select name="child_age" id="child_age"><option value="">Select age range</option><option>Under 2</option><option>2–4 years</option><option>4–6 years</option><option>6–9 years</option><option>9–12 years</option><option>12+ years</option><option>Multiple ages</option></select></div>
+    <div class="survey-q"><label for="neurodivergent">Any neurodevelopmental differences?</label><select name="neurodivergent" id="neurodivergent"><option value="">Select</option><option>No</option><option>Yes — autism</option><option>Yes — ADHD</option><option>Yes — sensory processing</option><option>Yes — other</option><option>Under evaluation</option><option>Prefer not to say</option></select></div>
+    <div class="survey-q wide"><label for="frustration">What's your biggest frustration finding quality activities for your child?</label><textarea name="frustration" id="frustration" placeholder="Be honest — what takes the most time or feels hardest?"></textarea></div>
+    <div class="survey-q wide"><label>Which would help you most? Select all that apply.</label><div class="survey-checks"><label class="check-opt"><input type="checkbox" name="need" value="development_view"> Seeing where my child is developmentally and what's next</label><label class="check-opt"><input type="checkbox" name="need" value="lesson_library"> All quality activities from different sources in one place</label><label class="check-opt"><input type="checkbox" name="need" value="quality_filter"> A reliable quality filter so I know what's actually good</label><label class="check-opt"><input type="checkbox" name="need" value="calendar"> A calendar that connects activities to developmental goals</label><label class="check-opt"><input type="checkbox" name="need" value="caregiver"> Tools for grandparents, sitters, or others to engage meaningfully</label><label class="check-opt"><input type="checkbox" name="need" value="struggle_areas"> Knowing where my child struggles and what to do about it</label></div></div>
+    <div class="survey-q"><label for="price_point">What would you pay per month?</label><select name="price_point" id="price_point"><option value="">Select</option><option>Nothing — I expect free</option><option>$5–10/month</option><option>$10–20/month</option><option>$20–30/month</option><option>More if it's genuinely useful</option></select></div>
+    <div class="survey-q"><label for="survey_email">Your email (to receive beta access)</label><input type="text" name="email" id="survey_email" placeholder="email@example.com" autocomplete="email"></div>
+    <div class="survey-q wide"><label for="other">Anything else?</label><textarea name="other" id="other" placeholder="Feature requests, concerns, what you've tried and why it didn't work..."></textarea></div>
+    <div class="survey-submit"><button type="submit">Submit feedback</button><div class="form-success" id="survey-success" style="margin-top:var(--sp-3)" role="status" aria-live="polite">✓ Thank you — this goes straight into our planning.</div></div>
+  </form>
+</section>
+
+<section class="final-cta" aria-label="Final waitlist call to action">
+  <div class="section-eyebrow">Summer 2026</div>
+  <h2 class="section-headline">Summer is here.<br>Parents needed this yesterday.</h2>
+  <p class="section-sub">Free beta. Opens in 2 weeks. Limited spots.</p>
+  <form class="final-form" name="waitlist-bottom" netlify onsubmit="handleWaitlistBottom(event)">
+    <input type="hidden" name="form-name" value="waitlist-bottom">
+    <input type="email" name="email" placeholder="Your email address" required autocomplete="email">
+    <button type="submit">Join beta</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-mark">Hew<span>.</span></div>
+  <p class="footer-note">© 2026 Hew · thehew.app · Building for families, by a family.</p>
+</footer>
+
+<script>
+  const C=['#0EA5E9','#F59E0B','#8B5CF6','#F43F5E','#10B981'],E='#E7E5E4';
+  function badge(el,sz,scored){
+    if(!el)return;
+    const cx=sz/2,cy=sz/2,oR=sz*.44,iR=sz*.26,gap=6;
+    el.setAttribute('width',sz);el.setAttribute('height',sz);el.setAttribute('viewBox',`0 0 ${sz} ${sz}`);
+    let h='';
+    for(let i=0;i<5;i++){
+      const s=i*72+gap/2,e=(i+1)*72-gap/2;
+      const p=(d,r)=>{const a=(d-90)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)];};
+      const[ox1,oy1]=p(s,oR),[ox2,oy2]=p(e,oR),[ix1,iy1]=p(s,iR),[ix2,iy2]=p(e,iR);
+      h+=`<path d="M${ox1},${oy1} A${oR},${oR} 0 0 1 ${ox2},${oy2} L${ix2},${iy2} A${iR},${iR} 0 0 0 ${ix1},${iy1} Z" fill="${scored[i]?C[i]:E}"/>`;
+    }
+    el.innerHTML=h;
+  }
+  badge(document.getElementById('b1'),12,[true,true,true,true,false]);
+  badge(document.getElementById('b2'),12,[false,false,false,false,false]);
+  badge(document.getElementById('b3'),12,[true,true,true,true,true]);
+  badge(document.getElementById('feat-badge'),20,[true,true,true,true,true]);
+  function post(fd){return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()});}
+  function handleWaitlist(e){e.preventDefault();post(new FormData(e.target)).finally(()=>{document.getElementById('waitlist-success').style.display='block';e.target.reset();});}
+  function handleSurvey(e){e.preventDefault();post(new FormData(e.target)).finally(()=>{document.getElementById('survey-success').style.display='block';});}
+  function handleWaitlistBottom(e){e.preventDefault();const b=e.target.querySelector('button');b.textContent="✓ You're in!";b.style.background='#10B981';b.style.color='white';post(new FormData(e.target));}
+</script>
+</body>
+</html>
